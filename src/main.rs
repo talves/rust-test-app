@@ -156,6 +156,15 @@ fn tuple_example() {
         rect2,
         area_struct(&rect2)
     );
+    let rect3 = Rectangle {
+        width: 60,
+        height: 20,
+    };
+    println!(
+        "The area of the rectangle {:?} is {} square pixels.",
+        rect3,
+        area_fn_struct(&rect3)
+    );
 }
 fn area_tuple(dimensions: (u32, u32)) -> u32 {
     dimensions.0 * dimensions.1
@@ -165,7 +174,14 @@ struct Rectangle {
     width: u32,
     height: u32,
 }
-
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
 fn area_struct(rectangle: &Rectangle) -> u32 {
     rectangle.width * rectangle.height
+}
+fn area_fn_struct(rectangle: &Rectangle) -> u32 {
+    rectangle.area()
 }
