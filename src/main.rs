@@ -10,6 +10,7 @@ fn main() {
     struct_example();
     tuple_example();
     emum_values();
+    enum_example();
 }
 
 fn scope_example() {
@@ -213,4 +214,21 @@ fn emum_values() {
     println!("The IP address: {:?}", home);
 }
 
-fn route(ip_kind: IpAddrKind) {}
+#[derive(Debug)]
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+impl Message {
+    fn call(&self) {
+        // method body would be defined here
+    }
+}
+
+fn enum_example() {
+    let m = Message::Write(String::from("hello"));
+    m.call();
+    println!("The message: {:?}", m);
+}
