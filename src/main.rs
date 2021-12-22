@@ -12,6 +12,7 @@ fn main() {
     emum_values();
     enum_example();
     enum_option();
+    enum_control_flow();
 }
 
 fn scope_example() {
@@ -246,4 +247,34 @@ fn enum_option() {
 
     let absent_number: AppOption<i32> = AppOption::None;
     println!("The none: {:?}", absent_number);
+}
+
+#[derive(Debug)]
+enum UsState {
+    Alabama,
+    Alaska,
+    // --snip--
+}
+
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState),
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter(state) => {
+            println!("State quarter from {:?}!", state);
+            25
+        }
+    }
+}
+
+fn enum_control_flow() {
+    value_in_cents(Coin::Quarter(UsState::Alaska));
 }
