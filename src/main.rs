@@ -9,6 +9,7 @@ fn main() {
     array_slice();
     struct_example();
     tuple_example();
+    emum_values();
 }
 
 fn scope_example() {
@@ -185,3 +186,31 @@ fn area_struct(rectangle: &Rectangle) -> u32 {
 fn area_fn_struct(rectangle: &Rectangle) -> u32 {
     rectangle.area()
 }
+
+#[derive(Debug)]
+enum IpAddrKind {
+    V4,
+    V6,
+}
+#[derive(Debug)]
+struct IpAddr {
+    kind: IpAddrKind,
+    address: String,
+}
+fn emum_values() {
+    let four = IpAddrKind::V4;
+    let six = IpAddrKind::V6;
+
+    let home = IpAddr {
+        kind: IpAddrKind::V4,
+        address: String::from("127.0.0.1"),
+    };
+
+    let loopback = IpAddr {
+        kind: IpAddrKind::V6,
+        address: String::from("::1"),
+    };
+    println!("The IP address: {:?}", home);
+}
+
+fn route(ip_kind: IpAddrKind) {}
