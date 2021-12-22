@@ -11,6 +11,7 @@ fn main() {
     tuple_example();
     emum_values();
     enum_example();
+    enum_option();
 }
 
 fn scope_example() {
@@ -224,11 +225,25 @@ enum Message {
 impl Message {
     fn call(&self) {
         // method body would be defined here
+        println!("The message: {:?}", self);
     }
 }
 
 fn enum_example() {
     let m = Message::Write(String::from("hello"));
     m.call();
-    println!("The message: {:?}", m);
+}
+
+#[derive(Debug)]
+enum AppOption<T> {
+    None,
+    Some(T),
+}
+
+fn enum_option() {
+    let some_number = AppOption::Some(5);
+    let some_string = AppOption::Some("a string");
+
+    let absent_number: AppOption<i32> = AppOption::None;
+    println!("The none: {:?}", absent_number);
 }
