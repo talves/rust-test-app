@@ -13,6 +13,7 @@ fn main() {
     enum_example();
     enum_option();
     enum_control_flow();
+    pattern_matching();
 }
 
 fn scope_example() {
@@ -249,13 +250,6 @@ fn enum_option() {
     println!("The none: {:?}", absent_number);
 }
 
-#[derive(Debug)]
-enum UsState {
-    Alabama,
-    Alaska,
-    // --snip--
-}
-
 enum Coin {
     Penny,
     Nickel,
@@ -277,4 +271,20 @@ fn value_in_cents(coin: Coin) -> u8 {
 
 fn enum_control_flow() {
     value_in_cents(Coin::Quarter(UsState::Alaska));
+}
+
+#[derive(Debug)] // so we can inspect the state in a minute
+enum UsState {
+    Alabama,
+    Alaska,
+    California,
+    Oregon,
+    Washington,
+    // --snip--
+}
+
+fn pattern_matching() {
+    let mut coin = Coin::Dime;
+    let coin_value = value_in_cents(coin);
+    println!("The coin is worth {:?} cents!", coin_value);
 }
