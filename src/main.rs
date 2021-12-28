@@ -1,5 +1,3 @@
-use std::sync::mpsc::Receiver;
-
 fn main() {
     scope_example();
     ownership_example();
@@ -14,6 +12,7 @@ fn main() {
     enum_option();
     enum_control_flow();
     pattern_matching();
+    calling_a_module_function();
 }
 
 fn scope_example() {
@@ -287,4 +286,8 @@ fn pattern_matching() {
     let mut coin = Coin::Dime;
     let coin_value = value_in_cents(coin);
     println!("The coin is worth {:?} cents!", coin_value);
+}
+
+fn calling_a_module_function() {
+    rust_test_app::eat_at_restaurant();
 }
