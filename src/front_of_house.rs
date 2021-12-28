@@ -1,8 +1,4 @@
-pub mod hosting {
-    pub fn add_to_waitlist() {}
-
-    fn seat_at_table() {}
-}
+pub mod hosting; // gets the hosting mod from front_of_house/hosting.rs
 
 mod serving {
     fn take_order() {}
