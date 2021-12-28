@@ -13,6 +13,7 @@ fn main() {
     enum_control_flow();
     pattern_matching();
     calling_a_module_function();
+    using_external_module();
 }
 
 fn scope_example() {
@@ -290,4 +291,12 @@ fn pattern_matching() {
 
 fn calling_a_module_function() {
     rust_test_app::eat_at_restaurant();
+}
+
+use std::collections::HashMap;
+
+fn using_external_module() {
+    let mut map = HashMap::new();
+    map.insert(1, 2);
+    println!("HashMap (map): {:?}", map);
 }
