@@ -14,6 +14,7 @@ fn main() {
     pattern_matching();
     calling_a_module_function();
     using_external_module();
+    common_collections();
 }
 
 fn scope_example() {
@@ -299,4 +300,46 @@ fn using_external_module() {
     let mut map = HashMap::new();
     map.insert(1, 2);
     println!("HashMap (map): {:?}", map);
+}
+
+fn common_collections() {
+    // A vector allows you to store a variable number of values next to each other.
+    let mut v: Vec<i32> = Vec::new();
+    println!("Vector (v): {:?}", v);
+    v = vec![1, 2, 3]; // vec is a macro used to store values
+    println!("Vector (v): {:?}", v);
+    v.push(12);
+    v.push(24);
+    println!("Vector (v): {:?}", v);
+    let third: &i32 = &v[2];
+    println!("The third element is {}", third);
+    match v.get(3) {
+        Some(third) => println!("The fourth element is {}", third),
+        None => println!("There is no third element."),
+    }
+    let first = &v[0];
+    println!("The first element is: {}", first);
+    v.push(48);
+    println!("Vector (v): {:?}", v);
+    for i in &v {
+        println!("{}", i);
+    }
+    for i in &mut v {
+        *i += 100;
+        println!("{}", i);
+    }
+    // A string is a collection of characters. We’ve mentioned the String type previously, but in this chapter we’ll talk about it in depth.
+    let data = "initial contents";
+    let s = data.to_string();
+    println!("String (s): {}", s);
+
+    // the method also works on a literal directly:
+    let s = "initial contents".to_string();
+    println!("String (s): {}", s);
+
+    let mut s = String::from("foo");
+    s.push_str("bar");
+    println!("String (s): {}", s);
+
+    // A hash map allows you to associate a value with a particular key. It’s a particular implementation of the more general data structure called a map.
 }
