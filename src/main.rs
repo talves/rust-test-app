@@ -13,8 +13,8 @@ fn main() {
     enum_control_flow();
     pattern_matching();
     calling_a_module_function();
-    using_external_module();
     common_collections();
+    using_hash_map();
 }
 
 fn scope_example() {
@@ -294,14 +294,6 @@ fn calling_a_module_function() {
     rust_test_app::eat_at_restaurant();
 }
 
-use std::collections::HashMap;
-
-fn using_external_module() {
-    let mut map = HashMap::new();
-    map.insert(1, 2);
-    println!("HashMap (map): {:?}", map);
-}
-
 fn common_collections() {
     // A vector allows you to store a variable number of values next to each other.
     let mut v: Vec<i32> = Vec::new();
@@ -342,4 +334,16 @@ fn common_collections() {
     println!("String (s): {}", s);
 
     // A hash map allows you to associate a value with a particular key. It’s a particular implementation of the more general data structure called a map.
+}
+
+use std::collections::HashMap;
+fn using_hash_map() {
+    let mut map = HashMap::new();
+    map.insert(1, 2);
+    println!("HashMap (map): {:?}", map);
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+    println!("HashMap (scores): {:?}", scores);
 }
