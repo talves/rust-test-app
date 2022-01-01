@@ -338,7 +338,7 @@ fn common_collections() {
     // A hash map allows you to associate a value with a particular key. It’s a particular implementation of the more general data structure called a map.
 }
 
-use std::collections::HashMap;
+use std::{collections::HashMap, io::Read};
 fn using_hash_map() {
     let mut map = HashMap::new();
     map.insert(1, 2);
@@ -351,5 +351,13 @@ fn using_hash_map() {
 }
 
 fn crash_n_burn() {
-    panic!("Crash and burn!");
+    // panic!("Crash and burn!");
+    // let v = vec![1, 2, 3];
+
+    // v[99];
+    read_missing_file();
+}
+
+fn read_missing_file() {
+    let f = File::open("hello.txt");
 }
