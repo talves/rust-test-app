@@ -431,4 +431,10 @@ fn read_username_from_file() -> Result<String, io::Error> {
         Ok(_) => Ok(s),
         Err(e) => Err(e),
     }
+
+    // Equivalent shorter code for above using ? (returns an error if one)
+    // let mut f = File::open("hello.txt")?;
+    // let mut s = String::new();
+    // f.read_to_string(&mut s)?;
+    // Ok(s)
 }
