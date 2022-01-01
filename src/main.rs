@@ -365,6 +365,10 @@ fn read_missing_file() {
     //     Err(E),
     // }
     let f = File::open("hello.txt");
-    // caught an error: file (hello.txt): Err(Os { code: 2, kind: NotFound, message: "No such file or directory" })
     println!("file (hello.txt): {:?}", f);
+    let f = match f {
+        Ok(file) => file,
+        Err(error) => panic!("Problem opening the file: {:?}", error),
+    };
+    // caught an error: file (hello.txt): Err(Os { code: 2, kind: NotFound, message: "No such file or directory" })
 }
