@@ -359,6 +359,11 @@ fn crash_n_burn() {
 }
 
 fn read_missing_file() {
+    // f will have a type enum Result(File, Error); Ok or Err
+    // enum Result<T, E> {
+    //     Ok(T),
+    //     Err(E),
+    // }
     let f = File::open("hello.txt");
     // caught an error: file (hello.txt): Err(Os { code: 2, kind: NotFound, message: "No such file or directory" })
     println!("file (hello.txt): {:?}", f);
