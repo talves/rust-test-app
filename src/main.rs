@@ -338,7 +338,11 @@ fn common_collections() {
     // A hash map allows you to associate a value with a particular key. It’s a particular implementation of the more general data structure called a map.
 }
 
-use std::{collections::HashMap, fs::File, io::Read};
+use std::{
+    collections::HashMap,
+    fs::File,
+    io::{ErrorKind, Read},
+};
 fn using_hash_map() {
     let mut map = HashMap::new();
     map.insert(1, 2);
@@ -356,6 +360,7 @@ fn crash_n_burn() {
 
     // v[99];
     read_missing_file();
+    check_error_kind();
 }
 
 fn read_missing_file() {
@@ -364,11 +369,39 @@ fn read_missing_file() {
     //     Ok(T),
     //     Err(E),
     // }
-    let f = File::open("hello.txt");
-    println!("file (hello.txt): {:?}", f);
+    let f = File::open("hello_ok.txt");
+    println!("file (hello_ok.txt): {:?}", f);
     let f = match f {
-        Ok(file) => file,
-        Err(error) => panic!("Problem opening the file: {:?}", error),
+        Ok(file) => file,                                              // return file
+        Err(error) => panic!("Problem opening the file: {:?}", error), // panic here, quit
     };
     // caught an error: file (hello.txt): Err(Os { code: 2, kind: NotFound, message: "No such file or directory" })
+}
+
+fn check_error_kind() {
+    let f = File::open("hello.txt");
+
+    let f = match f {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            // creates the file if it doesn't exist
+            ErrorKind::NotFound => match File::create("hello.txt") {
+                Ok(fc) => fc,
+                Err(e) => panic!("Problem creating the file: {:?}", e),
+            },
+            other_error => {
+                panic!("Problem opening the file: {:?}", other_error)
+            }
+        },
+    };
+    // The equivalent (better) code of the above
+    let f = File::open("hello.txt").unwrap_or_else(|error| {
+        if error.kind() == ErrorKind::NotFound {
+            File::create("hello.txt").unwrap_or_else(|error| {
+                panic!("Problem creating the file: {:?}", error);
+            })
+        } else {
+            panic!("Problem opening the file: {:?}", error);
+        }
+    });
 }
