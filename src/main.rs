@@ -15,6 +15,8 @@ fn main() {
     calling_a_module_function();
     common_collections();
     using_hash_map();
+    // Error handling
+    crash_n_burn();
 }
 
 fn scope_example() {
@@ -346,4 +348,8 @@ fn using_hash_map() {
     scores.insert(String::from("Blue"), 10);
     scores.insert(String::from("Yellow"), 50);
     println!("HashMap (scores): {:?}", scores);
+}
+
+fn crash_n_burn() {
+    panic!("Crash and burn!");
 }
