@@ -1,5 +1,6 @@
 use std::{
     collections::HashMap,
+    error::Error,
     fs::File,
     io::{self, ErrorKind, Read},
 };
@@ -363,6 +364,8 @@ fn crash_n_burn() {
     // v[99];
     read_missing_file();
     check_error_kind();
+    let f = dynamic_error();
+    println!("file (hello_ok.txt): {:?}", f);
 }
 
 fn read_missing_file() {
@@ -442,4 +445,9 @@ fn read_username_from_file() -> Result<String, io::Error> {
     // let mut s = String::new();
     // File::open("hello.txt")?.read_to_string(&mut s)?;
     // Ok(s)
+}
+fn dynamic_error() -> Result<(), Box<dyn Error>> {
+    let f = File::open("hello.txt")?;
+
+    Ok(())
 }
