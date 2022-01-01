@@ -1,3 +1,9 @@
+use std::{
+    collections::HashMap,
+    fs::File,
+    io::{self, ErrorKind, Read},
+};
+
 fn main() {
     scope_example();
     ownership_example();
@@ -17,6 +23,7 @@ fn main() {
     using_hash_map();
     // Error handling
     crash_n_burn();
+    propagating_error();
 }
 
 fn scope_example() {
@@ -338,11 +345,6 @@ fn common_collections() {
     // A hash map allows you to associate a value with a particular key. It’s a particular implementation of the more general data structure called a map.
 }
 
-use std::{
-    collections::HashMap,
-    fs::File,
-    io::{ErrorKind, Read},
-};
 fn using_hash_map() {
     let mut map = HashMap::new();
     map.insert(1, 2);
@@ -404,4 +406,29 @@ fn check_error_kind() {
             panic!("Problem opening the file: {:?}", error);
         }
     });
+
+    // Unwrapping the Ok
+    let f = File::open("hello.txt").unwrap();
+}
+
+fn propagating_error() {
+    println!("Calling propagating error");
+    let f = read_username_from_file();
+    println!("file (hello_ok.txt): {:?}", f);
+}
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let f = File::open("hello.txt");
+
+    let mut f = match f {
+        Ok(file) => file,
+        Err(e) => return Err(e),
+    };
+
+    let mut s = String::new();
+
+    match f.read_to_string(&mut s) {
+        Ok(_) => Ok(s),
+        Err(e) => Err(e),
+    }
 }
