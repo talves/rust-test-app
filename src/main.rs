@@ -6,6 +6,8 @@ use std::{
     io::{self, ErrorKind, Read},
 };
 
+use rust_test_app::{Summary, Tweet};
+
 fn main() {
     scope_example();
     ownership_example();
@@ -28,6 +30,8 @@ fn main() {
     propagating_error();
     // generics
     generics();
+    // traits
+    traits();
 }
 
 fn scope_example() {
@@ -485,4 +489,15 @@ fn generics() {
         point.y,
         point.distance_from_origin()
     );
+}
+
+fn traits() {
+    let tweet = Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from("of course, as you probably already know, people"),
+        reply: false,
+        retweet: false,
+    };
+
+    println!("1 new tweet: {}", tweet.summarize());
 }
