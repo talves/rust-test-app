@@ -6,7 +6,7 @@ use std::{
     io::{self, ErrorKind, Read},
 };
 
-use rust_test_app::{Summary, Tweet};
+use rust_test_app::{NewsArticle, Summary, Tweet};
 
 fn main() {
     scope_example();
@@ -501,9 +501,42 @@ fn traits() {
 
     println!("1 new tweet: {}", tweet.summarize());
     notify(&tweet);
+    let tweet = returns_summarizable();
+    println!("a new tweet: {}", tweet.summarize());
 }
 
 pub fn notify<T: Summary>(item: &T) {
     // this function has a trait bound to T (Summary trait)
     println!("Breaking news! {}", item.summarize());
 }
+
+fn returns_summarizable() -> impl Summary {
+    Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from("of course, as you probably already know, people"),
+        reply: false,
+        retweet: false,
+    }
+}
+
+// Does not compile right now
+// fn returns_summarizable_switch(switch: bool) -> impl Summary {
+//     if switch {
+//         NewsArticle {
+//             headline: String::from("Penguins win the Stanley Cup Championship!"),
+//             location: String::from("Pittsburgh, PA, USA"),
+//             author: String::from("Iceburgh"),
+//             content: String::from(
+//                 "The Pittsburgh Penguins once again are the best \
+//                  hockey team in the NHL.",
+//             ),
+//         }
+//     } else {
+//         Tweet {
+//             username: String::from("horse_ebooks"),
+//             content: String::from("of course, as you probably already know, people"),
+//             reply: false,
+//             retweet: false,
+//         }
+//     }
+// }
