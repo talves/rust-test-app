@@ -455,12 +455,33 @@ fn dynamic_error() -> Result<(), Box<dyn Error>> {
 }
 
 #[derive(Debug)]
-struct Point<T, U> {
+struct Point<T> {
     x: T,
-    y: U,
+    y: T,
 }
-
+impl<T> Point<T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+}
+impl Point<f32> {
+    fn distance_from_origin(&self) -> f32 {
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
+    }
+    fn refx(&self) -> &f32 {
+        println!("reference of x: {}", &self.x);
+        &self.x
+    }
+}
 fn generics() {
-    let point: Point<i32, f32> = Point { x: 5, y: 3.0 };
-    println!("point: {:?} x:{} y:{}", point, point.x, point.y);
+    let point: Point<i32> = Point { x: 5, y: 3 };
+    println!("point: {:?} x:{} y:{}", point, point.x(), point.y);
+    let point: Point<f32> = Point { x: 10.0, y: 10.0 };
+    println!(
+        "point: {:?} x:{} y:{} distance:{}",
+        point,
+        point.refx(),
+        point.y,
+        point.distance_from_origin()
+    );
 }
