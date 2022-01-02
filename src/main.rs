@@ -32,6 +32,8 @@ fn main() {
     generics();
     // traits
     traits();
+    // lifetimes
+    lifetimes();
 }
 
 fn scope_example() {
@@ -540,3 +542,17 @@ fn returns_summarizable() -> impl Summary {
 //         }
 //     }
 // }
+
+// Lifetimes
+
+fn lifetimes() {
+    println!("which: {}", longest("long", "longer"));
+}
+
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
