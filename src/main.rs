@@ -25,6 +25,8 @@ fn main() {
     // Error handling
     crash_n_burn();
     propagating_error();
+    // generics
+    generics();
 }
 
 fn scope_example() {
@@ -450,4 +452,15 @@ fn dynamic_error() -> Result<(), Box<dyn Error>> {
     let f = File::open("hello.txt")?;
 
     Ok(())
+}
+
+#[derive(Debug)]
+struct Point<T, U> {
+    x: T,
+    y: U,
+}
+
+fn generics() {
+    let point: Point<i32, f32> = Point { x: 5, y: 3.0 };
+    println!("point: {:?} x:{} y:{}", point, point.x, point.y);
 }
