@@ -503,6 +503,7 @@ fn traits() {
     notify(&tweet);
 }
 
-pub fn notify(item: &impl Summary) {
+pub fn notify<T: Summary>(item: &T) {
+    // this function has a trait bound to T (Summary trait)
     println!("Breaking news! {}", item.summarize());
 }
