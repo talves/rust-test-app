@@ -1,3 +1,4 @@
+#![allow(unused)]
 mod front_of_house; // tells rust to load from front_of_house.rs
 
 pub mod back_of_house {
