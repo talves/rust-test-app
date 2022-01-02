@@ -500,4 +500,9 @@ fn traits() {
     };
 
     println!("1 new tweet: {}", tweet.summarize());
+    notify(&tweet);
+}
+
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
 }
