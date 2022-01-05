@@ -85,3 +85,30 @@ impl Summary for Tweet {
         format!("{}: {}", self.username, self.content)
     }
 }
+
+// private function
+fn prints_and_returns_value(a: i32) -> i32 {
+    println!("I got the value {}", a);
+    a
+}
+
+// Tests (unit tests)
+#[cfg(test)]
+mod tests {
+    use super::*; // allows tests to use private functions (brings into scope)
+
+    // if you run with parallel (multiple threads), cargo test -- --show-output
+    // to run syncronous cargo test -- --test-threads=1
+    #[test]
+    fn this_test_will_pass() {
+        let value = prints_and_returns_value(4);
+        assert_eq!(4, value);
+    }
+
+    #[test]
+    #[ignore] // this fails with testing (cargo test -- --ignored)
+    fn this_test_will_fail() {
+        let value = prints_and_returns_value(8);
+        assert_eq!(6, value); // should be 8
+    }
+}
