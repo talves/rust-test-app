@@ -86,6 +86,11 @@ impl Summary for Tweet {
     }
 }
 
+// public function
+pub fn adder(a: i32, b: i32) -> i32 {
+    (a + b)
+}
+
 // private function
 fn prints_and_returns_value(a: i32) -> i32 {
     println!("I got the value {}", a);
