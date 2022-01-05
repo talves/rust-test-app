@@ -3,5 +3,6 @@
 
 pub fn setup() {
     // setup code specific to your library's tests would go here
+    // to see this print we need to run our test as cargo test -- --show-output
     println!("Setting up our tests")
 }
