@@ -505,7 +505,7 @@ fn traits() {
 
     println!("1 new tweet: {}", tweet.summarize());
     notify(&tweet);
-    let tweet = returns_summarizable();
+    let tweet = returns_summarizable_tweet();
     println!("a new tweet: {}", tweet.summarize());
 }
 
@@ -514,7 +514,7 @@ pub fn notify<T: Summary>(item: &T) {
     println!("Breaking news! {}", item.summarize());
 }
 
-fn returns_summarizable() -> impl Summary {
+fn returns_summarizable_tweet() -> impl Summary {
     Tweet {
         username: String::from("horse_ebooks"),
         content: String::from("of course, as you probably already know, people"),
@@ -536,12 +536,7 @@ fn returns_summarizable_switch(switch: bool) -> Box<dyn Summary> {
             ),
         })
     } else {
-        Box::new(Tweet {
-            username: String::from("horse_ebooks"),
-            content: String::from("of course, as you probably already know, people"),
-            reply: false,
-            retweet: false,
-        })
+        Box::new(returns_summarizable_tweet())
     }
 }
 
