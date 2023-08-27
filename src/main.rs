@@ -540,8 +540,6 @@ fn returns_summarizable_switch(switch: bool) -> Box<dyn Summary> {
     }
 }
 
-// Lifetimes
-
 fn dynamic_traits() {
     let summary = returns_summarizable_switch(true);
     println!(
